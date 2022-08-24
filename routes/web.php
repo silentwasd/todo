@@ -26,6 +26,8 @@ Route::post('/todo/add', [TodoController::class, 'add']);
 
 Route::post('/todo/remove/{item}', [TodoController::class, 'remove']);
 
+Route::post('/todo/rename/{item}', [TodoController::class, 'rename']);
+
 Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),

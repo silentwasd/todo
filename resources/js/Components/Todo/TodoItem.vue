@@ -3,7 +3,7 @@ import TodoCheckbox from "@/Components/Todo/TodoCheckbox.vue";
 import Button from "@/Components/Button.vue";
 import {usePage} from "@inertiajs/inertia-vue3";
 
-const emit = defineEmits(['removed']);
+const emit = defineEmits(['removed', 'wantRename']);
 
 const props = defineProps({
     item: {
@@ -57,7 +57,8 @@ async function remove() {
                      @update:checked="onCheckedUpdate" />
 
 
-        <div class="flex actions">
+        <div class="flex actions gap-3">
+            <Button class="bg-cyan-600 hover:bg-cyan-800" @click="emit('wantRename', item)">Rename</Button>
             <Button class="bg-rose-600 hover:bg-rose-800" @click="remove">Remove</Button>
         </div>
     </div>
