@@ -4,9 +4,10 @@ After cloning repository you need to do that steps:
 
 1. `composer update`
 2. `vendor/bin/sail up -d`
-3. `vendor/bin/sail npm install`
-4. `vendor/bin/sail node node_modules/.bin/vite build`
-5. `vendor/bin/sail restart`
+3. `vendor/bin/sail artisan migrate`
+4. `vendor/bin/sail npm install`
+5. `vendor/bin/sail node node_modules/.bin/vite build`
+6. `vendor/bin/sail restart`
 
 # Run
 
