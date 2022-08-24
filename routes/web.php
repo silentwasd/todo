@@ -16,7 +16,11 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [TodoController::class, 'index']);
+Route::redirect('/', '/todo');
+
+Route::get('/todo', [TodoController::class, 'index']);
+
+Route::post('/todo/update/{item}', [TodoController::class, 'update']);
 
 Route::get('/welcome', function () {
     return Inertia::render('Welcome', [
