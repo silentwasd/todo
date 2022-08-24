@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('todo_items', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('is_checked');
+            $table->boolean('is_checked')->default(false);
         });
     }
 

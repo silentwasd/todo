@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TodoAddRequest;
 use App\Http\Requests\TodoUpdateRequest;
 use App\Models\TodoItem;
 use Illuminate\Http\Request;
@@ -25,5 +26,16 @@ class TodoController extends Controller
         $item->save();
 
         return response()->json();
+    }
+
+    public function add(TodoAddRequest $request)
+    {
+        $item = new TodoItem;
+
+        $item->name = $request->input('name');
+
+        $item->save();
+
+        return response()->json( $item->fresh() );
     }
 }
