@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\TodoController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,27 +16,16 @@ use Inertia\Inertia;
 
 Route::redirect('/', '/todo');
 
-Route::get('/todo', [TodoController::class, 'index']);
+Route::prefix('/todo')->group(function () {
 
-Route::post('/todo/update/{item}', [TodoController::class, 'update']);
+    Route::get('', [TodoController::class, 'index']);
 
-Route::post('/todo/add', [TodoController::class, 'add']);
+    Route::post('update/{item}', [TodoController::class, 'update']);
 
-Route::post('/todo/remove/{item}', [TodoController::class, 'remove']);
+    Route::post('add', [TodoController::class, 'add']);
 
-Route::post('/todo/rename/{item}', [TodoController::class, 'rename']);
+    Route::post('remove/{item}', [TodoController::class, 'remove']);
 
-Route::get('/welcome', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    Route::post('rename/{item}', [TodoController::class, 'rename']);
+
 });
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-require __DIR__.'/auth.php';
