@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-/var/www/html/node_modules/.bin/vite build
-
 if [ ! -z "$WWWUSER" ]; then
     usermod -u $WWWUSER sail
 fi
