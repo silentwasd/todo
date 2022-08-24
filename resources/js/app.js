@@ -6,7 +6,10 @@ import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
+
 import * as chance from 'chance';
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
@@ -24,3 +27,12 @@ createInertiaApp({
 InertiaProgress.init({ color: '#4B5563' });
 
 window.chance = chance();
+window.Pusher = Pusher;
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: 'test',
+    wsHost: window.location.hostname,
+    wsPort: 6001,
+    forceTLS: false,
+    disableStats: true
+});

@@ -17,12 +17,28 @@ const state = reactive({
 
 state.items = props.items.slice();
 
+Echo.channel('App.Models.TodoItem')
+    .listen('.TodoItemCreated', (e) => onNewItem(e.model))
+    .listen('.TodoItemUpdated', (e) => onItemUpdated(e.model))
+    .listen('.TodoItemDeleted', (e) => onItemRemoved(e.model));
+
 function onNewItem(item) {
-    state.items.push(item);
+    if (state.items.find(_item => _item.id === item.id) === undefined)
+        state.items.push(item);
+}
+
+function onItemUpdated(item) {
+    const index = state.items.findIndex(_item => _item.id === item.id);
+    if (index !== -1) {
+        state.items[index].name = item.name;
+        state.items[index].is_checked = item.is_checked;
+    }
 }
 
 function onItemRemoved(item) {
-    state.items.splice(state.items.findIndex(_item => _item.id === item.id), 1);
+    const index = state.items.findIndex(_item => _item.id === item.id);
+    if (index !== -1)
+        state.items.splice(index, 1);
 }
 </script>
 
