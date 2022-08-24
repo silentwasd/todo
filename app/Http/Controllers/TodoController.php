@@ -38,4 +38,11 @@ class TodoController extends Controller
 
         return response()->json( $item->fresh() );
     }
+
+    public function remove(TodoItem $item)
+    {
+        $item->delete();
+
+        return response()->json();
+    }
 }
