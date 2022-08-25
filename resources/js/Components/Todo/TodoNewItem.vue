@@ -34,7 +34,10 @@ async function add() {
 
 <template>
     <div class="flex gap-3 w-full">
-        <Input v-model="state.name" placeholder="New todo" class="flex-1 px-3" />
+        <Input v-model="state.name"
+               placeholder="New todo"
+               class="flex-1 px-3"
+               @keydown.enter="add" />
         <Button @click="add">Add</Button>
     </div>
 </template>
